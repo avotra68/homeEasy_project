@@ -1,0 +1,30 @@
+@media all and (min-width: 375px) and (max-width: 1200px)
+{
+
+
+}
+
+@media all and (min-width: 100px) and (max-width: 375px)
+{
+	#ongletDonneesGrandEcran{
+		display: none;
+	}
+
+	#devise{
+	text-align:left;
+	background-color: #5900b3;
+	border: 0.3vh solid #9494b8;
+	height: 5vh;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	font-size: 3vh;
+	}
+
+	#logo{
+		display: none;
+	}
+
+	section{
+	  margin-top: 0vh;
+	}
+}

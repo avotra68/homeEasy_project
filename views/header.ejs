@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app='HomeApps'>
+
+	<meta charset="utf-8">
+
+  <title>HomeEasyManagement/depenses</title>
+
+	<link rel="icon" href="images/logo_HomeEasyManagement.png" type="image/png" sizes="16x16">
+
+  <link rel="stylesheet" href="css/style.css">
+    <!--Pour les animations wow  -->
+  <link rel="stylesheet" href="css/animate.css">
+    <!--media screen c'est pour les media queries  -->
+  <link rel="stylesheet" media="screen and (max-width: 1280px)" href="css/petite_resolution.css" />
+
+	<!--  jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+
+<script src="scripts/jquery.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<!-- <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> -->
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+    <!-- jQuery library  -->
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--  angular sources-->
+
+    <!--  fin angular sources-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <!-- DEBUT SCRIPT WOW et cacher navbar-collapse après click  -->
+  <script>
+  // pour activer wow animation
+	  (function () {
+	      new WOW().init();
+	  })();
+// ou tout simplement new WOW().init();
+  // pour fermer le menu de l'icon bar après clic => éviter de scroller ++ dans un petit écran
+   $(document).ready(function () {
+		//  cacher menu après clic
+      var navCollapse = $(".navbar-collapse");
+      navCollapse.on("click", "a", null, function () {
+              navCollapse.collapse('hide');
+      });
+
+		// date picker (revenu)
+
+			var date_inputRevenu=$('input[name="date"]'); //our date input has the name "date"
+	    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+	    var options={
+	      format: 'yyyy/mm/dd',
+	      container: container,
+	      todayHighlight: true,
+	      autoclose: true,
+	    };
+	    date_inputRevenu.datepicker(options);
+
+
+			// date picker (depenses)
+				var mois_inputDepense=$('input[name="date_depense"]'); //our date input has the name "date"
+		    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		    var options={
+		      format: 'yyyy/mm/dd',
+		      container: container,
+		      todayHighlight: true,
+		      autoclose: true,
+					today:"true",
+	  			language:"fr",
+		    };
+		    mois_inputDepense.datepicker(options);
+
+
+			// check 2 password ==>inscription
+		 $('#confirm_passwordInscription').on('keyup', function () {
+	  	if ($('#motDePasse').val() == $('#confirm_passwordInscription').val()) {
+	    $('#message').html('Mot de passe identitque').css('color', 'green');
+	  	} else
+	    $('#message').html('Mot de passe différent du précedent').css('color', 'red');
+			});
+
+   });
+  </script>
+
+      <!-- FIN SCRIPT WOW et cacher navbar-collapse après click  -->
+	<script type="text/Javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="scripts/HomeApps.js"></script>
+
+
+
+	<body>
+
+
+		<div ng-controller="AppsHomeController" class="container fluid" >
+
+			<div class="row" id="entete">
+
+				<img id="logo"class="img-responsive col-lg-2" src="images/logo_HomeEasyManagement.png" alt="logo du home management">
+				<!--Devise => animation js  -->
+				<p id="devise"class="col-lg-8"></p>
+				<img id="logo"class="img-responsive col-lg-2" src="images/logo_HomeEasyManagement.png" alt="logo du home management">
+
+			</div>
+
+			<div class="row">
+
+        <nav class="navbar navbar-inverse  col-lg-12 " style="background-color:#5900b3;font-weight:bold;border: 1vh solid #9494b8;color:white;">
+          <div class="container-fluid">
+          <!-- Bouton qui apparait lorsque ecran trop petit-->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+              </button>
+              <!-- / Bouton qui apparait lorsque ecran trop petit-->
+            </div>
+              <!-- /Bouton qui apparait lorsque ecran trop -->
+              <!--ICI on peut mettre un titre par exemple:
+                <a class="navbar-brand" href="#"><img src="img/simplon_logo_50px.png" alt="Simplon">
+                    <span class="redSimplonColor">S</span>Simplon.co #
+                    <span class="redSimplonColor pouetFlou">SARCELLES</span>
+                </a>  -->
+          <div id="navbar" class="navbar-collapse collapse"> <!-- Contenu du navbar -->
+            <ul class="nav navbar-nav wow pulse data-wow-duration="100s"">
+							<li><a href="accueil">Accueil</a></li>
+							<%
+
+								if(typeof locals.user!= 'undefined'){
+									console.log('user = ' + JSON.stringify(locals.user))
+
+									 if(locals.user.connected==='TRUE'){%>
+										<li><a href="revenu">Revenus</a></a></li>
+										<li><a href="depense">Depenses</a></li>
+										<li><a href="donnees">Synthese</a></a></li>
+										<%
+											if(locals.user.isAdmin==='TRUE'){
+										%>
+											<li><a href="revenuAll">Revenus All</a></a></li>
+											<li><a href="depenseAll">Depenses All</a></a></li>
+											<li><a href="messageAll">Messages All</a></a></li>
+										<%
+											}
+										%>
+										<li><a href="contact">Contact</a></li>
+										<li><a href="logout">Logout</a></li>
+										<em >"<%=user.name%>" est connecté</em>
+							<%
+									}
+
+								}
+								else
+								{
+							%>
+
+
+							<li><a href="login">Login</a></li>
+							<li><a href="connexionInscription">S'inscrire</a></li>
+							<li><a href="contact">Contact</a></li>
+
+							<%
+								}
+							%>
+
+
+
+            </ul>
+          </div><!-- / Contenu du navbar -->
+        </div><!-- / container du navbar -->
+      </nav>
+    </div> <!-- / ROW navbar -->

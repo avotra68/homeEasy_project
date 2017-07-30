@@ -1,0 +1,90 @@
+/*#myFirstRow{
+  margin-top: 4vh;
+}*/
+
+#entete{
+  display: flex;
+  justify-content: center;
+}
+
+#afficheur{
+  background-color: #9494b8;
+}
+
+section{
+  margin-top: 4vh;
+}
+
+form{
+    padding:bottom: 4vh;
+}
+
+#devise{
+text-align: center;
+background-color: #5900b3;
+border: 1vh solid #9494b8;
+height: 7vh;
+margin-top: 6vh;
+font-weight: bold;
+font-size: 3vh;
+color: white;
+}
+
+#logo{
+  margin: 3vh 0 3vh 0;
+  height: 12%;
+  width: 11%;
+}
+
+textarea{
+  width: 100%;
+  height: 25vh;
+}
+.total{
+  height: 5vh;
+}
+
+/*validation formulaire ==>css pour les erreurs*/
+input.ng-invalid.ng-dirty{
+  border: 0.3vh solid red;
+}
+
+input.ng-valid.ng-empty {
+    background-color: lightgreen;
+}
+
+.input-group{
+  margin-bottom: 2vh;
+}
+.depenseFormDivlabelInput{
+  margin: 2vh 0 2vh 0;
+}
+
+#phraseAccueil{
+  font-style: arial;
+  font-size: 2.5vh;
+  margin-bottom: 0;
+}
+
+/*slider*/
+
+.slider {
+    position: relative;
+    width: 65vh;
+    height: 50vh;
+    margin: 0 auto;
+    margin-top: 60vh;
+    transform: translateY(-50%);
+    border: 1.5vh solid #fff;
+    border-radius: 1.5vh;
+    box-shadow: 0 1.5vh 4vh rgba(0, 0, 0, 1);
+}
+img {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+img:first-of-type {
+    display: block;
+}

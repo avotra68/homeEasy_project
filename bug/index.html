@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html ng-app = "app" ng-controller = "appCtrl">
+  <head>
+    <meta charset="utf-8">
+    <title>trano_tsaratantana</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!--Pour les animations wow  -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!--media screen c'est pour les media queries  -->
+  	<link rel="stylesheet" media="screen and (max-width: 1280px)" href="css/petite_resolution.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--  angular sources-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <!--  fin angular sources-->
+    <script src="js/wow.min.js"></script>
+  	<!-- DEBUT SCRIPT WOW et cacher navbar-collapse après click  -->
+  	<script>
+  	// pour activer wow animation
+  	(function () {
+  		new WOW().init();
+  	})();
+  // ou tout simplement new WOW().init();
+  	// pour fermer le menu de l'icon bar après clic => éviter de scroller ++ dans un petit écran
+  	$(document).ready(function () {
+  		var navCollapse = $(".navbar-collapse");
+  		navCollapse.on("click", "a", null, function () {
+  				navCollapse.collapse('hide');
+  		});
+  	});
+  	</script>
+  	<!-- FIN SCRIPT WOW et cacher navbar-collapse après click  -->
+  </head>
+  <body >
+    <div class="container fluid">
+      <div class="row">
+        <p id="titreUn"class="col-lg-12">So easy home managment</p>
+        <img class="img-responsive col-lg-2" src="images/logoHomeManagement.jpg" alt="logo du home management">
+
+        <div class="col-lg-10" id="moisEnCoursSoldeDepenseRecette">
+
+          <a href="#">{{ mois en cours}}</a> </br>
+
+          <form class="well form-inline" action="" method="post">
+            <label for="solde">Solde</label>
+            <input type="number" name="solde" value="solde" class="form-control">
+            <label for="depenses">Dépenses</label>
+            <input type="number" name="depenses" value="depenses" class="form-control">
+            <label for="recette">Recettes</label>
+            <input type="number" name="recettes" value="recettes" class="form-control">
+          </form>
+
+        </div>
+      </div> <!-- fin row pour la première rangée-->
+
+      <div class="row">
+
+          <nav class="navbar navbar-inverse  col-lg-12 " style="background-color:#5900b3;font-weight:bold;border: 1vh solid #9494b8;color:white;">
+            <div class="container-fluid">
+            <!-- Bouton qui apparait lorsque ecran trop petit-->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                </button>
+                <!-- / Bouton qui apparait lorsque ecran trop petit-->
+              </div>
+                <!-- /Bouton qui apparait lorsque ecran trop -->
+                <!--ICI on peut mettre un titre par exemple:
+                  <a class="navbar-brand" href="#"><img src="img/simplon_logo_50px.png" alt="Simplon">
+                      <span class="redSimplonColor">S</span>Simplon.co #
+                      <span class="redSimplonColor pouetFlou">SARCELLES</span>
+                  </a>  -->
+            <div id="navbar" class="navbar-collapse collapse"> <!-- Contenu du navbar -->
+              <ul class="nav navbar-nav wow pulse data-wow-duration="100s"">
+                <!-- On execute lors d'un clic les codes contenu dans la fontction competences() et ainsi de suite pour les autres boutons -->
+                <li ng-click="accueil()"><a href="#">Accueil</a></li>
+                <li  ng-click="connexionCompte()">
+                  <a href="#">Connexion</a></li>
+                <li  ng-click="depenses()"><a href="#">Ajouter vos dépenses</a></li>
+                <li ng-click="recettes()"><a href="#">Ajouter votre/vos revenus</a></a></li>
+                <li ng-click="historiquesDonnees()"><a href="#">Consulter vos historiques</a></li>
+                <li  ng-click="contact()"><a href="#">Contact</a></li>
+              </ul>
+            </div><!-- / Contenu du navbar -->
+          </div><!-- / container du navbar -->
+        </nav>
+      </div> <!-- / ROW navbar -->
+      <div class="row">
+        <div id="afficheur" class="col-lg-12">
+
+          <div ng-app>
+    <input id="nom" type="text" ng-model="nom" placeholder="Entrez votre nom ici">
+    <h1>Bonjour {{nom}} !</h1>
+</div>
+
+          <div class="row">
+
+            <section  class="col-lg-offset-2 col-lg-8" ng-show="ongletAccueil">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </section>
+
+          </div>
+
+
+          <!-- DEBUT Section CONNEXION et INSCRIPTION -->
+          <section  class="col-lg-offset-2 col-lg-8" ng-show="ongletConnexionInscription">
+            <!-- DEBUT formulaire de CONNEXION-->
+              <form class="well col-lg-12" action="" method="post">
+                  <p class="col-lg-4">
+                    <label for="mail">addresse mail</label></br>
+                    <input type="mail" name="mail" value="" class="form-control" >
+                  </p>
+                  <p class="col-lg-4">
+                    <label for="motDePasse">Mot de passe</label></br>
+                    <input type="password" name="motDePasse" value="" class="form-control" >
+                  </p>
+                  <p class="col-lg-4" >
+                  </br>
+                  <input type="submit" name="" value="connexion" class="form-control valider" style="background-color:#5900b3;color:white" >
+                  </p>
+              </form>
+              <!-- FIN formulaire de CONNEXION-->
+
+              <!-- DEBUT formulaire d'INSCRIPTION'-->
+                <form class="well col-lg-12" action="" method="post">
+                  <fieldset>
+                    <legend>Inscription</legend>
+                      <input type="text" name="prenom" value="" placeholder="prénom" class="form-control" >
+                      <input type="text" name="mail" value="" placeholder="nom" class="form-control" >
+                      <input type="text" name="adresse" value="" placeholder="votre ville" class="form-control" >
+                      <input type="password" name="motDePasse" value="" placeholder="mot de passe" class="form-control" >
+                      <input type="password" name="motDePasse" value="" placeholder="retaper votre mot de passe" class="form-control"  >
+                      <input type="submit" name="" value="inscription" class="form-control valider" style="background-color:#5900b3;color:white" >
+
+                  </fieldset>
+
+                </form>
+                <!-- FIN formulaire de CONNEXION-->
+          </section>
+          <!-- FIN Section CONNEXION  -->
+
+        <!-- DEBUT Section AJOUT DEPENSE  -->
+        <div class="row">
+        <section  class="col-lg-offset-2 col-lg-8" ng-hide="ongletAjoutDepenses">
+            <form class="" action="" method="post">
+              <fieldset>
+                <legend>Ajouter une dépense</legend>
+              <p>
+                <label for="ajoutDepenses">Catégorie</label>
+                <input type="search" name="ajoutDepenses" value="" placeholder="taper ici le type de dépense" class="form-control">
+              </p>
+              <p>
+                <label for="dateDepenses">Date</label>
+                <input type="date" name="date" value="" class="form-control" placeholder="taper ici la date de la dépense">
+              </p>
+              <p>
+                <label for="dateDepenses">Montant</label>
+                <input type="number" name="dateDepenses" value="" class="form-control" min="1" placeholder="montant">
+              </p>
+              <input type="submit" name="" value="ajouter ce dépense" class="form-control valider" style="background-color:#5900b3;color:white">
+            </fieldset>
+            </form>
+        </section>
+        <!-- FIN Section AJOUT DEPENSE  -->
+        </div>
+
+        <!-- DEBUT Section AJOUT REVENUS  -->
+        <div class="row">
+        <section  id="revenus" class="col-lg-offset-2 col-lg-8" ng-show="ongletAjoutRevenus">
+            <form class="" action="" method="post">
+              <fieldset  class="form-controll">
+                <legend>Ajouter votre revenu</legend>
+              <p>
+                <label for="ajoutRevenus">Catégorie</label>
+                <input type="search" name="ajoutRevenu" value="" placeholder="taper ici le type de revenu" class="form-control">
+              </p>
+              <p>
+                <label for="dateRevenus">Date</label>
+                <input type="date" name="date" value="" class="form-control" placeholder="date où vous avez reçu votre revenu">
+              </p>
+              <p>
+                <label for="montantRevenus">Montant</label>
+                <input type="number" name="montantrevenus" value="" class="form-control" min="1" placeholder="montant">
+              </p>
+              <input type="submit" name="" value="ajouter revenu" class="form-control valider" style="background-color:#5900b3;color:white">
+            </fieldset>
+            </form>
+        </section>
+        <!-- FIN Section AJOUT REVENU  -->
+        </div>
+
+        <div class="row">
+
+          <section id="contact" class="col-lg-offset-2 col-lg-8" ng-show="ongletContact">
+            <!-- DEBUT formulaire de CONNEXION-->
+              <form class="well col-lg-12" action="" method="post">
+                  <p class="col-lg-6">
+                    <label for="mail">addresse mail</label></br>
+                    <input type="mail" name="mail" value="" class="form-control" >
+                  </p>
+                  <p class="col-lg-6">
+                    <label for="motif">Motif de votre message</label></br>
+                    <input type="text" name="motif" value="" class="form-control" >
+                  </p>
+                  <p class="col-lg-6">
+                  <textarea name="message" placeholder="écrivez ici votre texte"></textarea>
+                  </p>
+                  <p class="col-lg-6" >
+                  <input type="submit" name="" value="envoyer" class="form-control valider" style="background-color:#5900b3;color:white" >
+                  </p>
+              </form>
+              <!-- FIN formulaire de CONNEXION-->
+
+
+          </section>
+
+        </div>
+
+
+      </div> <!-- fin div Afficheur-->
+
+
+    </div>  <!-- fin div container fluid-->
+
+
+
+  </body>
+</html>

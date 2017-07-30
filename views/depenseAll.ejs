@@ -1,0 +1,49 @@
+<% include header %>
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+            <div  class="col-lg-7" id="ongletdonneesDepenses" style="border: 1vh solid #5900b3;margin-top:4vh;">
+
+              <table border="1" class="table table-stripted">
+                <tr>
+                  <td>D</td>
+
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Id</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Utilisateur</td>
+                </tr>
+
+
+              <% for (depense of listDepense){%>
+                <tr>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/depenseAll/delete/<%=depense.id%>">Supprimer</a></td>
+
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.id%></td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.categories%></td>
+                  <%
+                    var d = new Date(depense.date_depense)
+                    var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
+                  %>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.montant%></td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.nom%> <%=depense.prenom%></td>
+
+                </tr>
+
+              <%
+              }
+              %>
+            </table>
+
+            </div>
+
+
+
+      </div> <!-- fin div Afficheur-->
+
+		</div> <!-- fin row-->
+
+  </div> <!-- fin grand container fluid-->
+
+	<% include footer %>

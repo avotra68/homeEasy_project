@@ -1,0 +1,67 @@
+<% include header %>
+
+  <div class="row">
+    <div id="afficheur" class="col-lg-12" align="center">
+      <div class="alert alert-warning">
+        <%
+          if (typeof user != 'undefined'){%>
+
+            <p><%=user.error %></p>
+
+            <%
+          }
+        %>
+      </div>
+
+      <!--
+      <form class="" action="login" method="post">
+        <input class="col-lg-6" type="email" name="email" value="">
+        <input class="col-lg-3" type="password" name="password" value="">
+        <input class="col-lg-3" type="submit" name="Login" value="Login">
+      </form>
+    -->
+
+      <!-- DEBUT formulaire de CONNEXION-->
+        <form name ="myFormConnexion" class="well has-feedback col-lg-12" action="login" method="post" novalidate>
+            <div class="col-lg-4">
+                <label for="email" class="col-lg-12">addresse mail</label></br>
+                <p class="input-group col-lg-12">
+                <span class="input-group-addon" style="height:3vh"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="email" name="email" class="form-control" ng-model="user.email" required />
+                <span style="color:red" ng-show="myFormConnexion.email.$dirty && myFormConnexion.email.$error.required">Champ requis</span>
+                <span style="color:red" ng-show="myFormConnexion.email.$dirty && myFormConnexion.email.$error.email">Ce n'est pas un Email</span>
+              </p>
+
+            </div>
+            <div class="col-lg-4">
+              <label for="password" class="col-lg-12">Mot de passe</label></br>
+              <p class="input-group col-lg-12">
+              <span class="input-group-addon" style="height:3vh"><i class="glyphicon glyphicon-lock"></i></span>
+
+              <input type="password" name="password" class="form-control" required ng-minlength="6" ng-maxlength="12" ng-model="user.password"/>
+
+              <span style="color:red" ng-show="myFormConnexion.password.$dirty && myFormConnexion.password.$error.required">Champ requis</span>
+
+              <span style="color:red" ng-show="myFormConnexion.password.$dirty && myFormConnexion.password.$error.minlength">Mot de passe trop court (6 caractères minimun)</span>
+
+              <span style="color:red" style="color:red" ng-show="myFormConnexion.password.$dirty && myFormConnexion.password.$error.maxlength">Mot de passe trop long (12 caractères maximum)</span>
+            </p>
+            </div>
+            <p class="col-lg-4" >
+            </br>
+            <input type="submit" name="" value="Se connecter" class="form-control" style="background-color:#5900b3;color:white" >
+            </p>
+        </form>
+        <!-- FIN formulaire de CONNEXION-->
+
+
+
+
+    </div> <!-- fin div Afficheur-->
+
+
+
+  </div>
+
+
+  <% include footer %>

@@ -1,0 +1,76 @@
+<% include header %>
+
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+
+				<div id="donneesIdem" class="col-lg-12" id="ongletdonneesIdem" style="border: 1vh solid #5900b3; height: 60vh;margin-top:4vh;">
+          <div class="col-lg-6">
+            <div class="alert alert-success" align="center" style="font-weight: bold;">Revenus /Annee/Mois/categories</div>
+            <table border="1" class="table table-stripted">
+              <tr>
+                <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Annee</td>
+                <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Mois</td>
+                <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+                <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+              </tr>
+
+              <%
+
+
+                for (revenu of listRevenu){
+
+                  %>
+
+                <tr>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.annee%></td>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.mois%></td>
+                  <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.categories%></td>
+                  <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.montant%></td>
+
+                </tr>
+
+              <%
+                }
+              %>
+            </table>
+          </div>
+          <div class="col-lg-6">
+            <div class="alert alert-danger" align="center" style="font-weight: bold;">Depenses /Annee/Mois/categories</div>
+
+            <table border="1" class="table table-stripted">
+              <tr>
+                <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Annee</td>
+                <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Mois</td>
+                <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+                <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+              </tr>
+
+              <%
+
+              for (depense of listDepense){
+
+              %>
+
+                <tr>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.annee%></td>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.mois%></td>
+                  <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.categories%></td>
+                  <td class="col-lg-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.montant%></td>
+
+                </tr>
+
+              <%
+                }
+              %>
+            </table>
+            </div>
+				</div>
+
+      </div> <!-- fin div Afficheur-->
+
+     </div>
+
+		</div>
+
+
+	<% include footer %>

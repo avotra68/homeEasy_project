@@ -1,0 +1,86 @@
+	<% include header %>
+
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+
+        <section  class="col-lg-offset-1 col-lg-10" id="ongletAccueil">
+
+					<p id="phraseAccueil">
+
+
+						"Home Easy Managment" est une application facile d'utilisation pour les particuliers qui permet de gérer leurs budgets.
+						Pour pouvoir enregistrer vos revenus et dépenses, il faudrait créer un compte utilisateur pour s'authentifier.
+						Vous pouvez également, suivre l'évolution de vos données mensuelles et/ou annuelles.
+						Une fois que vous êtes inscrit.
+						Il y a un diagramme également qui affiche d'une manière très succinte la courbe de vos revenus et dépenses.
+						L'application donne une possiblilité de supprimé une ou plusieurs données enregistrée.s.
+						Cette application est fait pour qu'elle soit à la portée de tout le monde.
+						"Home Easy Managment" est une application sécurisée, vos données personnelles sont donc protégées et ne seront pas utilisées à des fins commerciaux.
+
+					</p>
+
+        </section>
+				<div class="slider">
+
+		        <img src="images/a.jpg" alt="">  <!--  indice 0 display block-->
+		        <img src="images/b.jpg" alt="">  <!--  indice 1 display none-->
+		        <img src="images/c.jpg" alt="">  <!--  indice 2 display none-->
+		        <img src="images/d.jpg" alt="">  <!--  indice 3 display none-->
+						<img src="images/e.jpg" alt="">  <!--  indice 4 display none-->
+						<img src="images/f.jpg" alt="">  <!--  indice 5 display none-->
+						<img src="images/g.jpg" alt="">  <!--  indice 6 display none-->
+						<img src="images/h.jpg" alt="">  <!--  indice 7 display none-->
+						<img src="images/i.jpg" alt="">  <!--  indice 8 display none-->
+		    </div>
+      </div> <!-- fin div Afficheur-->
+		</div> <!-- fin row-->
+
+
+		<script>
+    /* 3 FONCTIONS IMPORTANTES GESTION DE TEMPS JS:
+    settimeout appel une fois au bout d'un certain temps
+    setInterval appel la fonction tous les x milliseconde, de manière indéfinie
+    clearInterval pour arrêter l'interval*/
+    $(document).ready(function () {
+      // initialisation des variables :
+      var indice=1; //représente de l'image
+      var tourne=true; //indique que le slider tourne
+      var nbImage = $('img').length;
+			// ==>Calcul automatiquement le nombre d'image indice ==nbImage
+
+      //Déclaration d'une fonction d'affichage des images
+
+      function affiche() {
+        if(indice == nbImage){
+          indice = 0;
+          $('img').hide();
+
+        }
+
+        // Affiche l'image
+        $('img').eq(indice).show();
+        indice++; //incrémentation (+1)
+      };
+      // fonction pour la pause :
+
+        $('img').click(function () {
+          if(tourne){ //si le slider tourne
+            clearInterval(timer);
+            tourne = false //indique que le slider est à l'arrêt
+          }
+          else {
+            affiche();
+            timer=setInterval(affiche, 2000);
+            tourne = true;
+
+          }
+        });
+
+      var timer=setInterval(affiche, 2000); //appel la fonction affiche() toutes les 3s, Affiche c'est un call back =>pas mettre ()
+
+    }); //fin DOC Ready
+
+    </script>
+
+
+		<% include footer %>

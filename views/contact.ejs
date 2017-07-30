@@ -1,0 +1,71 @@
+<% include header %>
+  <%
+    var tmpEmail;
+    if(typeof locals.user != 'undefined'){
+      if(user.connected==='TRUE'){
+        tmpEmail = locals.user.email;
+%>
+
+<%
+      }
+      else{
+        tmpEmail=''
+      }
+    }
+    else{
+  %>
+      tmpEmail = '';
+  <%
+    }
+  %>
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+
+				<!-- DEBUT formulaire de CONTACT-->
+        <section  class="col-lg-offset-1 col-lg-10" id="ongletContact">
+
+          <form name ="myFormContact" class="well col-lg-12" action="/contact" method="post" novalidate>
+              <p class="col-lg-12">
+                <label for="adresse_mail">adresse mail</label></br>
+                <input type="email" name="adresse_mail" id="adresse_mail" class="form-control" value="<%=tmpEmail%>" required>
+
+								<span class="text-danger" style="color:red" ng-show="myFormContact.adresse_mail.$dirty && myFormContact.adresse_mail.$error.required">Champ requis</span>
+								<span class="text-danger" style="color:red" ng-show="myFormContact.adresse_mail.$dirty && myFormContact.adresse_mail.$error.email">Ce n'est pas un Email</span>
+              </p>
+
+              <p class="col-lg-12">
+
+                <label for="motif_message">Motif de votre message</label></br>
+                <input type="text" name="motif_message" id="motif_message" class="form-control" maxlength="40" required>
+								<span class="text-danger" style="color:red" ng-show="myFormContact.motif_message.$dirty && myFormContact.motif_message.$error.required">Champ requis</span>
+
+              </p>
+              <p class="col-lg-12">
+              <textarea name="message" id="message" placeholder="écrivez ici votre message" ng-minlength="10" ng-maxlength="500" required></textarea>
+
+							<span style="color:red" ng-show="myFormContact.message.$dirty && myFormContact.message.$error.required">Champ requis</span>
+
+							<span style="color:red" ng-show="myFormContact.message.$dirty && myFormContact.message.$error.minlength">texte trop court</span>
+
+							<span style="color:red" ng-show="myFormContact.message.$dirty && myFormContact.message.$error.maxlength">Texte trop long</span>
+
+              </p>
+              <p class="col-lg-12" >
+              <input type="submit"  value="envoyer" class="form-control valider" style="background-color:#5900b3;color:white" ng-disabled="myFormContact.$invalid">
+              </p>
+          </form>
+          <!-- FIN formulaire de CONTACT-->
+
+
+          </section>
+
+
+
+
+
+      </div> <!-- fin div Afficheur-->
+
+		</div>
+
+	</div>
+		<% include footer %>

@@ -1,0 +1,41 @@
+<% include header %>
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+        <table border="1" class="table table-stripted">
+          <tr>
+              <td>D</td>
+              <!--<td>E</td>-->
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">ID</td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">De</td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Objet</td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Message</td>
+
+          </tr>
+
+
+        <% for (message of listMessage){%>
+          <tr>
+            <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/messageAll/delete/<%=message.id%>">Supprimer</a></td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.id%></td>
+            <%
+              var d = new Date(message.date_message)
+              var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
+            %>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.adresse_mail%></td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.motif_message%></td>
+            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.message%></td>
+
+
+          </tr>
+
+        <%
+        }
+        %>
+      </table>
+      </div> <!-- fin div Afficheur-->
+		</div>
+
+	</div>
+		<% include footer %>

@@ -1,0 +1,194 @@
+<% include header %>
+    <div class="row">
+      <div id="afficheur" class="col-lg-12">
+
+						<!-- DEBUT Section AJOUT DEPENSE  -->
+
+						<section  class="col-lg-5" id="ongletAjoutDepenses">
+
+								<form name="myFormExpense" class="col-lg-12" action="/depense" method="post" novalidate>
+
+								<div class="col-lg-12" id="depenseFormDivlabelInput">
+
+									Date de la dépense:
+									<!-- Date input datepicker ==>https://formden.com/blog/date-picker -->
+									<input class="form-control" id="date_depense" name="date_depense" placeholder="YYYY/MM/DD" type="text" value="" required/>
+									<!-- today() ==>mettre par défaut la date d'aujourd'hui  -->
+									<span style="color:red" ng-show="myFormExpense.date_depense.$dirty && myFormExpense.date_depense.$error.required">Date requise</span>
+							</div>
+
+
+								<div class="col-lg-12 depenseFormDivlabelInput">
+
+									Catégories de dépenses:
+									<select name="categories" class="col-lg-12">
+
+										<!-- début DEPENSES MENAGERES ALIMENTATION -->
+
+											<optgroup label="Dépenses ménagères-alimentation">
+
+												<option id="Imobilie">Dépenses ménagères-alimentation</option>
+
+												<option id ="loyerEmpruntImobilie">Loyer et/ou remboursement d'emprunt immobilie</option>
+
+												<option id ="chargeImobilie">Charges</option>
+
+												<option id ="electriciteImobilie">Electricité</option>
+
+												<option id ="electriciteImobilie">Gaz</option>
+
+												<option id ="telNetTv">Téléphone/Internet/TV</option>
+
+												<option id ="alimentation">Alimentation</option>
+
+												<option id ="assuranceHabitation">Assurances habitation</option>
+
+											</optgroup>
+
+											<!-- fin DEPENSES MENAGERES ALIMENTATION -->
+
+											<!-- début FRAIS FINANCIERS-->
+
+											<optgroup label="frais financiers">
+												<option id="fraisFinancierCourant">Frais financiers courants </option>
+												<option id="remboursementCreditNONimmoblie">Assurances</option>
+												<option id="autrefrais" >Autres frais</option>
+											</optgroup>
+											<!-- fin FRAIS FINANCIERS-->
+
+											<!-- début ENFANTS-->
+
+											<optgroup label="Enfants">
+												<option id="fraisGarde">Frais de garde</option>
+												<option id="Assurances">Remboursements de crédits NON immobiliers</option>
+												<option id="autreFrais" >Autres frais</option>
+											</optgroup>
+
+											<!-- fin ENFANTS-->
+
+											<!-- début HABILLEMENT-->
+
+											<optgroup label="Habillement">
+												<option id="vetement">vêtements</option>
+												<option id="chaussure">Chaussures</option>
+												<option id="accessoireHabillement" >Autres accessoires</option>
+											</optgroup>
+											<!-- fin HABILLEMENT-->
+
+											<!-- début TRANSPORTS-->
+
+											<optgroup label="Transports">
+												<option id="transportEnCommun">transport en commun</option>
+												<option id="voiture">Voiture</option>
+											</optgroup>
+											<!-- début HABILLEMENT-->
+
+											<!-- début LOISIRS ET CULTURE-->
+
+											<optgroup label="Loisirs et culture">
+												<option id="sortie">Sorties</option>
+												<option id="vacances">Vacances</option>
+												<option id="livreVideoMusique">Livres/vidéo/Musique/etc.</option>
+											</optgroup>
+											<!-- fin LOISIRS ET CULTURE--->
+
+											<!-- début IMPREVUES-->
+
+											<optgroup label="Dépenses imprévues">
+												<option id="depenseImprevue">Imprévus</option>
+											</optgroup>
+											<!-- fin IMPREVUES--->
+
+											<!-- début AIDES POUR LA FAMILLE-->
+
+											<optgroup label="Aides pour la famille">
+												<option id="pensionAlimentaireFamille">Pensions alimentaires</option>
+												<option id="aideImprevueFamille">Aides imprévues</option>
+											</optgroup>
+
+											<!-- fin AIDES POUR LA FAMILLE--->
+
+											<!-- début IMPOTS-->
+
+											<optgroup label="Impôts">
+												<option id="impotRevenu">Impôt sur le revenu</option>
+												<option id="taxeHabitation">Taxe d'habitation</option>
+												<option id="taxeFoncier">Taxe foncier</option>
+
+											</optgroup>
+
+											<!-- fin IMPOTS--->
+
+
+										</select>
+
+										</div>
+									<div class="col-lg-12 depenseFormDivlabelInput">
+
+										Montant dépense:
+
+										<input class="form-control" type="text" ng-minlength="1" ng-maxlength="20" name="montant" required >
+
+										<span style="color:red" ng-show="myFormExpense.montantDepense.$dirty && myFormExpense.montantDepense.$error.required">Champ requis</span>
+
+										<span  style="color:red" ng-show="myFormExpense.montantDepense.$dirty && myFormExpense.montantDepense.$error.number">Ce n'est pas un nombre</span>
+
+										<span  style="color:red" ng-show="myFormExpense.montantDepense.$dirty && myFormExpense.montantDepense.$error.maxlength">Enorme montant</span>
+
+									</div>
+
+
+									<input class="form-control" type="submit" name="enregistrerDepense" value="Enregistrer dépense" style="background:#5900b3;color:white;;width:92%; margin-left:2vh" ng-disabled="myFormDepense.$invalid">
+
+
+
+							</form>
+
+		        </section>
+		        <!-- FIN Section AJOUT DEPENSE  -->
+
+
+            <div  class="col-lg-7" id="ongletdonneesDepenses" style="border: 1vh solid #5900b3;margin-top:4vh;">
+
+              <table border="1" class="table table-stripted">
+                <tr>
+                  <td>D</td>
+
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Id</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+                </tr>
+
+
+              <% for (depense of listDepense){%>
+                <tr>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/depense/delete/<%=depense.id%>">Supprimer</a></td>
+
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.id%></td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.categories%></td>
+                  <%
+                    var d = new Date(depense.date_depense)
+                    var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
+                  %>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.montant%></td>
+
+                </tr>
+
+              <%
+              }
+              %>
+            </table>
+
+            </div>
+
+
+
+      </div> <!-- fin div Afficheur-->
+
+		</div> <!-- fin row-->
+
+  </div> <!-- fin grand container fluid-->
+
+	<% include footer %>
