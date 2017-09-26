@@ -23,20 +23,28 @@ class Revenu {
 
   static revenuAll(cb){
     connection.query('SELECT revenus.*, users.nom, users.prenom FROM revenus INNER JOIN users ON revenus.idUser=users.id ORDER by date DESC', (err, rows) =>{
-      if(err) throw err
+      if(err) throw err;
       cb(rows)
     })
   }
      static delete(id, cb){
        connection.query('Delete from revenus where id=?', [id], (err,result)=>{
-         if (err) throw console.error()
+         if (err) throw err;
          cb(result)
        })
      }
 
+     static deleteUserRevenu(idUser, cb){
+       connection.query('Delete from revenus where idUser=?', [idUser], (err,result)=>{
+         if (err) throw err;
+         cb(result)
+       })
+     }
+
+
      static select(id, cb){
        connection.query('SELECT * FROM revenus where id=?', [id], (err,result)=>{
-         if (err) throw console.error()
+         if (err) throw err;
          cb(result)
        })
      }

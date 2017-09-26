@@ -1,37 +1,35 @@
 <% include header %>
     <div class="row">
 
-      <div id="afficheur" class="col-lg-12">
+      <div class="afficheur col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
-        <div  class="col-lg-7" id="ongletdonneesRevenus" style="border: 1vh solid #5900b3;margin-top:4vh;">
+        <div  class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12  col-xs-12 " id="ongletdonneesRevenus" style="margin-top:4vh;">
 
-          <table border="1" class="table table-stripted">
+          <table border=1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table table-condensed table-responsive">
             <tr>
-                <td>D</td>
-                <!--<td>E</td>-->
-
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">ID</td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Utilisateur</td>
+              <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;" >D</td>
+              <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">ID</td>
+              <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+              <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Utilisateur</td>
             </tr>
 
 
           <% for (revenu of listRevenu){%>
             <tr>
-              <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/revenuAll/delete/<%=revenu.id%>">Supprimer</a></td>
+              <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/revenuAll/delete/<%=revenu.id%>">Suppr</a></td>
               <!--<td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/revenu/edit/<%=revenu.id%>">Modifier</a></td>-->
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.id%></td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.categories%></td>
+              <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.id%></td>
+              <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.categories%></td>
               <%
                 var d = new Date(revenu.date)
                 var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
               %>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.montant%></td>
-              <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.nom%> <%=revenu.prenom%></td>
+              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+              <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.montant%></td>
+              <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=revenu.nom%> <%=revenu.prenom%></td>
 
 
             </tr>

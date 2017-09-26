@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser')
 const serveStatic =require("serve-static");
 
 // c'est un module permet de piocher modifuer des élements du body  =>npm install body-parser --save,
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 // fin modules à utiliser
 
@@ -39,7 +39,7 @@ var PORT = 3030;
 http.createServer(app).listen(PORT);
 
 // Début middlewares
-app.use(serveStatic(__dirname +"/views"));
+app.use(serveStatic(__dirname +"/public"));
 
 
 // pour que l'application puisse gérer les donnees des formulaire
@@ -50,6 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+// secret sert à chiffrer les cookies, cookie:secure false parce que c'est pas du https apour effet d'identifier de manière unique chaque utilisateur
 app.use(session({
     secret: 'codeSecretPourCrypterLeCookie',
     resave: false,
@@ -57,8 +58,10 @@ app.use(session({
   })
 );
 
+// creer middleware pour les message flash TOUJOURS METTRE MIDDLEWARE SESSION AVANT CELUI DE FLASH
+app.use(require('./middlewares/flash'))
 
-
+// middleware: si la session existe , j'affecte à la session en cours  à l'utilisateur
 app.use(function(req, res, next) {
   if (typeof req.session != 'undefined'){
     if(req.session.connected==="TRUE"){
@@ -78,8 +81,8 @@ app.use(function(req, res, next) {
 });
 
 
-//Une fonction pour vérifier si un utilisateur est déjà connecté
-//Sinon : çaa renvoie vers la page d'accueil
+//Une fonction qui sera appelée en call back dans les routes qui requièrent une connexion utilisateur
+
 function connectionNeeded(req, res, next){
   console.log(JSON.stringify(req.session) + ' req.session.connected='+ req.session.connected);
   if(req.session && (req.session.email) && (req.session.connected==="TRUE")){
@@ -90,6 +93,7 @@ function connectionNeeded(req, res, next){
   }
 }
 
+//Une fonction qui sera appelée en call back dans les routes qui requièrent une connexion administrateur
 
 function adminRightNeeded(req, res, next){
   if(req.session && (req.session.email) && (req.session.connected==="TRUE")  && (req.session.isAdmin==="TRUE")){
@@ -101,253 +105,139 @@ function adminRightNeeded(req, res, next){
 }
 
 
-// routes
-//Affichage page de login
-app.get("/login", (request, response)=>{
-  response.render("login");
-})
+// Début routes
 
-app.get("/logout", (request, response)=>{
-  request.session.destroy(function(err) {
-    if(err) {
-      console.log(err);
-    } else {
-      console.log('utilisateur déconnecté!');
-      response.redirect('/login');
-    }
-  });
-})
+  // appeler module contentant la route pour aller vers la racine
+  const rootRacineGetCtrl = require('./controllers/gRacineCtrl');
 
+  app.get("/", rootRacineGetCtrl.cleObjetRacineGetCtrl)
+
+  // appeler module contentant la route pour aller vers la racine
+  const rootAccueilGetCtrl = require('./controllers/gAccueilCtrl');
+
+  app.get("/accueil",rootAccueilGetCtrl.cleObjetAccueilGetCtrl )
+
+  // appeler module contentant la route get inscription
+  const rootInscriptionGetCtrl = require('./controllers/gInscriptionCtrl');
+
+  // debut  inscription
+  app.get("/inscription",rootInscriptionGetCtrl.cleObjetInscriptionGetCtrl);
+
+    // appeler module contentant la route post inscription
+  const rootInscriptionPostCtrl = require('./controllers/pInscriptionCtrl');
+
+  app.post('/inscription', rootInscriptionPostCtrl.cleObjetInscriptionPostCtrl);
+
+  //Affichage page de login
+  // appeler module contentant la route post Login
+  const rootLoginGetCtrl = require('./controllers/gLoginCtrl');
+
+  app.get("/login", rootLoginGetCtrl.cleObjetLoginGetCtrl)
+
+  // appeler module contentant la route post Login
+  const rootLoginPostCtrl = require('./controllers/pLoginCtrl');
   //beigin app.post(login)
-  app.post('/login',function(req, res){
-    req.session.userId=''
-    req.session.email = ''
-    req.session.name = ''
-    req.session.connected = 'FALSE'
-    req.session.isAdmin = "FALSE"
-    req.session.error = '';
 
-    var email = req.body.email;
-    var password = req.body.password;
-    req.session.email = email;
-
-    connection.query('SELECT * FROM users WHERE email = ? and motDePasse=?',[email, password], function (error, results, fields) {
-      if (error) {
-        console.log("error ocurred",error);
-        req.session.userId=''
-        req.session.email = ''
-        req.session.name = ''
-        req.session.connected = 'FALSE'
-        req.session.isAdmin = "FALSE"
-        req.session.error = '';
-        req.session.user.error = "Erreur lors de l'authentication";
-        res.locals.user = req.session;
-        res.render("login")
-      }
-      else{
-         console.log('Resultat controle existance de l\'utilisateur : ', results);
-        if(results.length >0){
-            console.log("connexion reussie");
-            req.session.userId = results[0].id;
-            req.session.email = results[0].email;
-            if(req.session.email==='avofeno@yahoo.fr'){
-                req.session.isAdmin = "TRUE"
-            }
-            else {
-              req.session.isAdmin = "FALSE"
-            }
-            req.session.name = results[0].nom + ' ' + results[0].prenom;
-            req.session.connected = "TRUE";
-            req.session.error = ""
-            res.locals.user = req.session;
-
-            res.render("accueil")
-        }
-        else{
-          req.session.userId=''
-          req.session.email = ''
-          req.session.name = ''
-          req.session.connected = 'FALSE'
-          req.session.isAdmin = "FALSE"
-          req.session.error = '';
-          res.locals.user = req.session;
-          res.render("login")
-        }
-      }
-    });
-  });
+  app.post('/login',rootLoginPostCtrl.cleObjetLoginPostCtrl);
   //end app.post (login)
 
+  // appeler module contentant la route get logout
+  const rootLogoutGetCtrl = require('./controllers/gLogoutCtrl');
 
-  app.get("/", (request, response) => {
-    // pour récuperer message all crée db.js parite vue aussi à modif
-    response.render('accueil')
-  })
+  app.get("/logout", rootLogoutGetCtrl.cleObjetLogoutGetCtrl);
 
-  app.get("/accueil", (request, response) => {
-    // pour récuperer message all crée db.js parite vue aussi à modif
-    response.render('accueil')
-  })
+// fin connexionInscription ===> inscription
 
-  // debut connexionInscription ===> inscription
-  app.get("/connexionInscription", (request, response) => {
-    response.render('connexionInscription');
-  })
+// appeler module contentant la route get Revenu
+  const rootRevenuGetCtrl = require('./controllers/gRevenuCtrl');
 
-  app.post('/connexionInscription',(request,response) => {
-      connection.query('INSERT INTO users SET nom=?, prenom=?, ville=?,email=?, motDePasse=?, date_inscription =?', [request.body.nom, request.body.prenom, request.body.ville, request.body.email, request.body.motDePasse, new Date()], function (err,result) {
-      if (err) throw console.error();
-      console.log(result);
-      response.redirect('/connexionInscription');
-    });
-  });
-
-    // fin connexionInscription ===> inscription
-
-  app.get("/revenu",connectionNeeded, (request, response) => {
-      let Revenu = require('./models/revenu');
-      console.log('ID = ' + request.session.id);
-      Revenu.all(request.session.userId, function(listRevenus){
-        // pour récuperer message all crée db.js parite vue aussi à modif
-        response.render('revenu', {listRevenu : listRevenus});
-      })
-    });
-
-  app.post("/revenu", connectionNeeded, (request, response) => {
-      let Revenu = require('./models/revenu');
-      Revenu.create(request.body.categories, request.body.date, request.body.montant,request.session.userId, function(){
-        response.redirect('/revenu');
-        });
-    });
+  app.get("/revenu",connectionNeeded, rootRevenuGetCtrl.cleObjetRevenuGetCtrl);
 
 
-  app.get("/revenu/delete/:id",connectionNeeded, (request, response) => {
-    let Revenu = require('./models/revenu');
-    if (request.params.id !=''){
-      Revenu.delete(request.params.id, function(){
-          response.redirect('/revenu');
-      });
-    }
-    else{
-      response.redirect('/revenu');
-    }
-  });
+  // appeler module contentant la route Post Revenu
+  const rootRevenuPostCtrl = require('./controllers/pRevenuCtrl');
 
-  app.get("/revenuAll",connectionNeeded,adminRightNeeded, (request, response) => {
-      let Revenu = require('./models/revenu');
-      console.log('ID = ' + request.session.id);
-      Revenu.revenuAll(function(listRevenus){
-        // pour récuperer message all crée db.js parite vue aussi à modif
-        response.render('revenuAll', {listRevenu : listRevenus});
-      })
-    });
+  app.post("/revenu", connectionNeeded,rootRevenuPostCtrl.cleObjetRevenuPostCtrl);
 
-    app.get("/revenuAll/delete/:id",connectionNeeded,adminRightNeeded, (request, response) => {
-      let Revenu = require('./models/revenu');
-      if (request.params.id !=''){
-        Revenu.delete(request.params.id, function(){
-            response.redirect('/revenuAll');
-        });
-      }
-      else{
-        response.redirect('/revenuAll');
-      }
-    });
+  // appeler module contentant la route get Delete Revenu:id
+  const rootDeleteRevenuGetCtrl = require('./controllers/gRevenuDeleteIdCtrl');
 
-  app.get("/depense",connectionNeeded, (request, response) => {
-    //On crée une instance de l'objet Depense
-    let Depense = require('./models/depense');
-    //On appelle la fonction ALL qui renvoie toute la liste des depenses
-    // Cet appel mettra le resultat dans la variable listDepenses
-    Depense.all(request.session.userId, function(listDepenses){
-      //on affiche la page en passant en paramètre une donnée nommé listDepense
-      response.render('depense', {listDepense : listDepenses});
-    })
-  });
+  app.get("/revenu/delete/:id",connectionNeeded, rootDeleteRevenuGetCtrl.cleObjetDeleteRevenuGetCtrl);
 
+  // appeler module contentant la route get revenuAll
+  const rootRevenuAllGetCtrl = require('./controllers/gRevenuAllCtrl');
 
-  app.post("/depense", connectionNeeded, (request, response) => {
-    let Depense = require('./models/depense')
-    Depense.create(request.body.categories, request.body.date_depense, request.body.montant,request.session.userId, function(){
-      response.redirect('/depense')
-    });
-  });
+  app.get("/revenuAll",connectionNeeded,adminRightNeeded,rootRevenuAllGetCtrl.cleObjetRevenuAllGetCtrl );
 
-  app.get("/depense/delete/:id", connectionNeeded, (request, response) => {
-      let Depense = require('./models/depense');
-      if (request.params.id !=''){
-        Depense.delete(request.params.id, function(){
-          response.redirect('/depense');
-      });
-    }
-    else{
-      response.redirect('/depense');
-    }
-  });
+  // appeler module contentant la route get Delete RevenuAll:id
+  const rootDeleteRevenuAllGetCtrl = require('./controllers/gRevenuAllDeleteIdCtrl');
 
-  app.get("/depenseAll",connectionNeeded,adminRightNeeded, (request, response) => {
-    //On crée une instance de l'objet Depense
-    let Depense = require('./models/depense');
-    //Appeler la fonction static depenseAll qui se trouve dans le modele depense
-    //Lui passer en paramètre de la fonction Callback une variable pour récuperer les résultats de la requête
-    Depense.depenseAll(function(listDepenses){
-      //Au retour du Callback, on appelle la page depenseAll avec un objet en paramètre. dans l'objet
-      //on renvoie à la page via unz variable quelconque (ici listDepense sans s) le résultats du Callback : listDepenses
-      response.render('depenseAll', {listDepense : listDepenses});
-    })
-  });
+  app.get("/revenuAll/delete/:id",connectionNeeded,adminRightNeeded,rootDeleteRevenuAllGetCtrl.cleObjetDeleteRevenuAllGetCtrl);
 
-  app.get("/depenseAll/delete/:id", connectionNeeded,adminRightNeeded, (request, response) => {
-      let Depense = require('./models/depense');
-      if (request.params.id !=''){
-        Depense.delete(request.params.id, function(){
-          response.redirect('/depenseAll');
-      });
-    }
-    else{
-      response.redirect('/depenseAll');
-    }
-  });
+  // appeler module contentant la route get depense
+  const rootDepenseGetCtrl = require('./controllers/gDepenseCtrl');
+
+  app.get("/depense",connectionNeeded, rootDepenseGetCtrl.cleObjetDepenseGetCtrl);
+
+  // appeler module contentant la route post depense
+  const rootDepensePostCtrl = require('./controllers/pDepenseCtrl');
+
+  app.post("/depense", connectionNeeded, rootDepensePostCtrl.cleObjetDepensePostCtrl);
+
+  // appeler module contentant la route get Delete Revenu:id
+  const rootDeleteDepenseGetCtrl = require('./controllers/gDepenseDeleteIdCtrl');
+
+  app.get("/depense/delete/:id", connectionNeeded, rootDeleteDepenseGetCtrl.cleObjetDeleteDepenseGetCtrl);
+  // appeler module contentant la route get DepenseAll:id
+
+  const rootDepenseAllGetCtrl = require('./controllers/gDepenseAllCtrl');
+
+  app.get("/depenseAll",connectionNeeded,adminRightNeeded, rootDepenseAllGetCtrl.cleObjetDepenseAllGetCtrl);
+
+  // appeler module contentant la route get Delete DepenseAll:id
+  const rootDeleteDepenseAllGetCtrl = require('./controllers/gDepenseAllDeleteIdCtrl');
+
+  app.get("/depenseAll/delete/:id", connectionNeeded,adminRightNeeded, rootDeleteDepenseAllGetCtrl.cleObjetDeleteDepenseAllGetCtrl);
 
 
-  app.get("/donnees",connectionNeeded, (request, response) => {
-    let Donnees = require('./models/donnees');
-    Donnees.selectRevenu(request.session.userId, function(listRevenus){
-      Donnees.selectDepense(request.session.userId, function(listDepenses){
-        response.render('donnees', {listRevenu : listRevenus, listDepense : listDepenses});
-        // pour récuperer message all crée db.js parite vue au
-      })
-    })
-  });
+  // appeler module contentant la route get donnee
+  const rootDonneeGetCtrl = require('./controllers/gDonneeCtrl');
+
+  app.get("/donnees",connectionNeeded, rootDonneeGetCtrl.cleObjetDonneeGetCtrl );
 
 
-  app.get("/contact", (request, response) => {
-    response.render('contact')
-  })
+  // appeler module contentant la route get contact
+  const rootContactGetCtrl = require('./controllers/gContactCtrl');
+
+  app.get("/contact",rootContactGetCtrl.cleObjetContactGetCtrl )
+
+  // appeler module contentant la route post contact
+  const rootContactPostCtrl = require('./controllers/pContactCtrl');
+
+  app.post('/contact',rootContactPostCtrl.cleObjetContactPostCtrl)
+
+  // appeler module contentant la route post all messsages
+  const rootMessageAllGetCtrl = require('./controllers/gMessageAllCtrl');
+
+  app.get("/messageAll",connectionNeeded,adminRightNeeded,rootMessageAllGetCtrl.cleObjetMessageAllGetCtrl );
+
+  // appeler module contentant delete/messageAll:id
+  const rootDeleteMessageAllGetCtrl = require('./controllers/gMessageAllDeleteIdCtrl');
+
+  app.get('/messageAll/delete/:id', connectionNeeded,adminRightNeeded,rootDeleteMessageAllGetCtrl.cleObjetDeleteMessageAllGetCtrl)
 
 
+  // appeler module contentant get edit profil
+  const rootEditUserProfilGetCtrl = require('./controllers/gEditUserProfilCtrl');
 
-  app.post('/contact',(request,response)=>{
-    let Message = require('./models/message')
-    Message.create(request.body.adresse_mail, request.body.motif_message, request.body.message, function(){
-      response.redirect('/contact')
-    })
-  })
+  app.get("/editUserProfil",connectionNeeded,rootEditUserProfilGetCtrl.cleObjetEditUserProfilGetCtrl);
 
-  app.get('/messageAll/delete/:id', connectionNeeded,adminRightNeeded, (request,response)=>{
-    if (request.params.id != '') {
-      let Message = require('./models/message')
-      Message.delete(request.params.id, function(){
-        response.redirect('/messageAll')
-      })
-    }
-  })
+  const rootEditUserProfilPostCtrl = require('./controllers/pEditUserProfilCtrl');
 
+  // appeler module contentant post edit profil
+  app.post("/editUserProfil",connectionNeeded,rootEditUserProfilPostCtrl.cleObjetEditUserProfilPostCtrl);
 
-  app.get("/messageAll",connectionNeeded,adminRightNeeded, (request, response) => {
-    //On crée une instance de l'objet Depense
-    let Message = require('./models/message');
-    Message.messageAll(function(listMessages){
-      response.render('messageAll', {listMessage : listMessages});
-    })
-  });
+  const rootDeleteProfilGetCtrl = require('./controllers/gDeleteProfilCtrl');
+
+  app.get("/editUserProfil/delete/:idUser", connectionNeeded,rootDeleteProfilGetCtrl.cleObjetDeleteProfilGetCtrl )
+  // Fin routes

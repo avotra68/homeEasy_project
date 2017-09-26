@@ -1,0 +1,72 @@
+<!--
+
+<div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  <input type="text" name="prenom"  value="<%=unChampUser.prenom%>" id="prenom" placeholder="prénom" class="form-control" ng-model="user.prenom" ng-minlength="2" ng-maxlength="20" required/>
+  <span style="color:red" ng-show="myFormProfilUser.prenom.$dirty && myFormProfilUser.prenom.$error.required">Champ requis</span>
+  <span style="color:red" ng-show="myFormProfilUser.prenom.$dirty && myFormProfilUser.prenom.$error.minlength">Prénom trop court</span>
+  <span style="color:red" ng-show="myFormProfilUser.prenom.$dirty && myFormProfilUser.prenom.$error.maxlength">Prénom trop long</span>
+</div>
+
+
+<div class="input-group">
+
+  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  <input type="text" name="nom"  value="<%= unChampUser.nom %>" id="nom" placeholder="nom" class="form-control" ng-model="user.nom" required ng-minlength="2" ng-maxlength="30"/>
+  <span style="color:red" ng-show="myFormProfilUser.nom.$dirty && myFormProfilUser.nom.$error.required">Champ requis</span>
+  <span ng-show="myFormProfilUser.nom.$dirty && myFormProfilUser.nom.$error.minlength">Nom trop court</span>
+  <span style="color:red" ng-show="myFormProfilUser.nom.$dirty && myFormProfilUser.nom.$error.maxlength">Nom trop long</span>
+
+</div>
+
+<div class="input-group">
+
+  <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+  <input type="text" name="ville"  value="<%= unChampUser.ville %>" class="form-control" id="ville" placeholder="votre ville" ng-model="user.adresse" required ng-minlength="2" ng-maxlength="20"/>
+
+  <span style="color:red" ng-show="myFormProfilUser.ville.$dirty &&  myFormProfilUser.ville.$error.required">Champ requis</span>
+
+  <span style="color:red" ng-show="myFormProfilUser.ville.$dirty &&  myFormProfilUser.ville.$error.minlenght">Adresse trop court</span>
+
+  <span style="color:red" ng-show="myFormProfilUser.ville.$dirty &&  myFormProfilUser.ville.$error.maxlenght">Adresse  trop long</span>
+
+</div>
+
+<div class="input-group">
+
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input type="email" name="email" value="<%=unChampUser.email%>" id="email" placeholder="votre Email" class="form-control" ng-model="user.emailInscription" ng-pattern="emailEditPattern" required/>
+  <span style="color:red" ng-show="myFormProfilUser.email.$dirty && myFormProfilUser.email.$error.required">Champ requis</span>
+  <span style="color:red" ng-show="myFormProfilUser.email.$dirty && myFormProfilUser.email.$error.email || myFormInscription.email.$error.pattern">Ce n'est pas un Email</span>
+
+</div>
+
+<div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  <input type="password" name="motDePasse" id="motDePasse" value="<%=unChampUser.motDePasse%>" placeholder="mot de passe de 6 à 12 caractères" class="form-control" ng-model="user_Password" required ng-minlength="6" ng-maxlength="12"/>
+
+  <span style="color:red" style="color:red" ng-show="myFormProfilUser.motDePasse.$dirty && myFormProfilUser.motDePasse.$error.required">Champ requis</span>
+  <span style="color:red" ng-show="myFormProfilUser.motDePasse.$dirty && myFormProfilUser.motDePasse.$error.minlength">Mot de passe trop court (6 caractères minimun)</span>
+  <span style="color:red" style="color:red" ng-show="myFormProfilUser.motDePasse.$dirty && myFormProfilUser.motDePasse.$error.maxlength">Mot de passe trop long (12 caractères maximum)</span>
+
+</div>
+
+<div class="input-group">
+
+  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+
+  <input type="password" name="confirmPassword" value="<%=unChampUser.motDePasse%>" id="confirm_passwordInscription" placeholder="retaper votre mot de passe de 6 à 12 caractères" class="form-control" ng-model="user_confirmPassword" required ng-minlength="6" ng-maxlength="12" />
+
+  <span style="color:red" ng-show="myFormProfilUser.confirmPassword.$dirty && myFormProfilUser.confirmPassword.$error.required">Champ requis</span>
+
+  <span style="color:red" ng-show="myFormProfilUser.confirmPassword.$dirty && myFormProfilUser.confirmPassword.$error.minlength">Mot de passe trop court (6 caractères minimun)</span>
+
+  <span style="color:red" ng-show="myFormProfilUser.confirmPassword.$dirty && myFormProfilUser.confirmPassword.$error.maxlength">Mot de passe trop long (12 caractères maximum)</span>
+
+  <span id ="message" class="help-inline"></span>
+
+</div>
+-->
+
+              <%
+        

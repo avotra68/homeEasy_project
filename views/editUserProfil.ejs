@@ -1,0 +1,108 @@
+<% include header %>
+
+
+    <div class="row">
+      <div class="afficheur col-lg-12">
+
+						<!-- DEBUT Section EDIT PROFIL -->
+        <section  class="col-lg-offset-2 col-lg-8">
+
+	        <!-- DEBUT formulaire EDIT PROFIL-->
+					<!-- form validation VIDEO==>https://www.youtube.com/watch?v=t6XUPVmlYbY -->
+	          <form name="myFormProfilUser" class="well col-lg-12" action="/editUserProfil" method="post">
+
+              <div class="help-block">
+              <!--il faut mettre locals devant la variable error pour qu'il puisse accéder à la variable local  -->
+              <% if (locals.flash && locals.flash.success) { %>
+              <div class="alert alert-success">
+                  <!--PAS OUBLIE LE EGALE =  -->
+                  <%= flash.success %>
+                </div>
+              <% } %>
+
+              <fieldset>
+	              <legend>Modifier votre profil ici</legend>
+
+								<% for (unChampUser of profilUser){
+
+									%>
+
+                    <div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  										<input  name="prenom" placeholder="prénom" class="form-control"  ng-minlength="2" ng-maxlength="20" value="<%=unChampUser.prenom%>" required/>
+  										<span style="color:red" ng-show="myFormProfilUser.prenom.$dirty.$invalid">Champ requis</span>
+  										<!-- <span style="color:red" ng-show="myFormProfilUser.prenom.$touched && myFormProfilUser.prenom.$error.minlength">Prénom trop court</span>
+  										<span style="color:red" ng-show="myFormProfilUser.prenom.$touched && myFormProfilUser.prenom.$error.maxlength">Prénom trop long</span> -->
+  									</div>
+
+
+                    <div class="input-group">
+
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  	                  <input type="text" name="nom" id="nom" placeholder="nom" class="form-control" required ng-minlength="2" ng-maxlength="30" value="<%=unChampUser.nom%>"/>
+  										<span style="color:red" ng-show="myFormProfilUser.nom.$touched && myFormProfilUser.nom.$error.required">Champ requis</span>
+  										<span style="color:red" ng-show="myFormProfilUser.nom.$touched && myFormProfilUser.nom.$error.minlength">Nom trop court</span>
+  										<span style="color:red" ng-show="myFormProfilUser.nom.$touched && myFormProfilUser.nom.$error.maxlength">Nom trop long</span>
+
+  									</div>
+
+                    <div class="input-group">
+
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+
+                      <input type="text" name="ville" id="ville" class="form-control"  placeholder="votre ville" ng-minlength="2" ng-maxlength="20" value="<%=unChampUser.ville%>" required />
+
+                      <span style="color:red" ng-show="myFormProfilUser.ville.$touched &&  myFormProfilUser.ville.$error.required">Champ requis</span>
+
+                      <span style="color:red" ng-show="myFormProfilUser.ville.$touched &&  myFormProfilUser.ville.$error.minlenght">Adresse trop court</span>
+
+                      <span style="color:red" ng-show="myFormProfilUser.ville.$touched &&  myFormProfilUser.ville.$error.maxlenght">Adresse  trop long</span>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  										<input type="email" name="email" id="email" placeholder="votre Email" class="form-control"  value="<%=unChampUser.email%>"  required/>
+  										<span style="color:red" ng-show="myFormProfilUser.email.$touched && myFormProfilUser.email.$error.required">Champ requis</span>
+  										<span style="color:red" ng-show="myFormProfilUser.email.$touched && myFormProfilUser.email.$error.email ">Ce n'est pas un Email</span>
+                      <!-- ng-pattern="emailPattern" -->
+                      <!--|| myFormProfilUser.email.$error.pattern  -->
+
+  									</div>
+
+                    <div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  										<input name="motDePasse" id="motDePasse" placeholder="mot de passe de 6 à 12 caractères" class="form-control" value="<%=unChampUser.motDePasse%>"  ng-minlength="6" ng-maxlength="12" required/>
+
+  										<span style="color:red" style="color:red" ng-show="myFormProfilUser.motDePasse.$touched && myFormProfilUser.motDePasse.$error.required">Champ requis</span>
+  										<span style="color:red" ng-show="myFormProfilUser.motDePasse.$touched && myFormProfilUser.motDePasse.$error.minlength">Mot de passe trop court (6 caractères minimun)</span>
+  										<span style="color:red" style="color:red" ng-show="myFormProfilUser.motDePasse.$touched && myFormProfilUser.motDePasse.$error.maxlength">Mot de passe trop long (12 caractères maximum)</span>
+
+  									</div>
+
+                  <input type="submit" name="modifierProfil" value="Enregistrer modification" class="form-control valider" style="background-color:#5900b3;color:white" >
+
+                  <p class="col-lg-12"><a href="/editUserProfil/delete/<%=unChampUser.id%>">Supprimer votre profil</a></p>
+
+                  <%
+												}
+																%>
+	                  </fieldset>
+
+	                </form>
+	                <!-- FIN formulaire EDIT PROFIL-->
+
+
+
+	          </section>
+
+	          <!-- FIN Section EDIT PROFIL-->
+
+
+      </div> <!-- fin div Afficheur-->
+
+
+		</div>
+	<% include footer %>

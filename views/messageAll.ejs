@@ -1,31 +1,30 @@
 <% include header %>
     <div class="row">
-      <div id="afficheur" class="col-lg-12">
-        <table border="1" class="table table-stripted">
+      <div class="afficheur col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table border="1" class="table table-stripted col-lg-12 col-md-12 col-sm-12  col-xs-12" style="margin-top:4vh;">
           <tr>
-              <td>D</td>
-              <!--<td>E</td>-->
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">ID</td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">De</td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Objet</td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Message</td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">D</td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">ID</td>
+            <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">De</td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">Objet</td>
+            <td class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style=" border: 0.5vh solid #5900b3;margin-top:2vh;">Message</td>
 
           </tr>
 
 
         <% for (message of listMessage){%>
           <tr>
-            <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/messageAll/delete/<%=message.id%>">Supprimer</a></td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.id%></td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/messageAll/delete/<%=message.id%>">Supprimer</a></td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.id%></td>
             <%
               var d = new Date(message.date_message)
               var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
             %>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.adresse_mail%></td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.motif_message%></td>
-            <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.message%></td>
+            <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style=" border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.adresse_mail%></td>
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style=" border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.motif_message%></td>
+            <td class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style=" border: 0.5vh solid #5900b3;margin-top:2vh;"><%=message.message%></td>
 
 
           </tr>

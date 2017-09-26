@@ -15,6 +15,9 @@ class Depense {
     })
   }
 
+
+
+
    static all(idUser, cb){
      connection.query('SELECT * FROM depenses  WHERE idUser='+ idUser +'  ORDER BY date_depense DESC', (err, rows) =>{
        if(err) throw err
@@ -33,7 +36,14 @@ class Depense {
 
    static delete(id, cb){
      connection.query('Delete from depenses where id=?', [id], (err,result)=>{
-       if (err) throw console.error()
+       if (err) throw err;
+       cb(result)
+     })
+   }
+
+   static deleteUserDepense(idUser, cb){
+     connection.query('Delete from depenses where idUser=?', [idUser], (err,result)=>{
+       if (err) throw err;
        cb(result)
      })
    }
@@ -43,15 +53,8 @@ class Depense {
        if (err) throw console.error()
        cb(result)
      })
-   }
 
-/*
-   static update(categories, date_depense, montant, cb){
-     connection.query('UPDATE depenses set categories=?, date_depense=?, montant=? ', [categories, date_depense, montant], (err,result)=>{
-       if (err) throw console.error()
-       cb(result)
-     })
-   }*/
+}
 
 }
 

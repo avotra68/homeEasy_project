@@ -34,12 +34,12 @@ class Message {
    })
  }
 
- static update(id,adresse_mail, motif_message, message, cb){
-   connection.query('UPDATE messages set adresse_mail=?, motif_message=?, message=? where id=?', [adresse_mail, motif_message, message, id], (err,result)=>{
-     if (err) throw console.error()
-     cb(result)
-   })
- }
+ // static update(id,adresse_mail, motif_message, message, cb){
+ //   connection.query('UPDATE messages set adresse_mail=?, motif_message=?, message=? where id=?', [adresse_mail, motif_message, message, id], (err,result)=>{
+ //     if (err) throw console.error()
+ //     cb(result)
+ //   })
+ // }
 
 
 }

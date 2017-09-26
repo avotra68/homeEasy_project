@@ -1,10 +1,10 @@
 <% include header %>
     <div class="row">
-      <div id="afficheur" class="col-lg-12">
+      <div class="afficheur col-lg-12 container">
 
 						<!-- DEBUT Section AJOUT DEPENSE  -->
 
-						<section  class="col-lg-5" id="ongletAjoutDepenses">
+						<section  class="col-lg-5" id="ongletAjoutDepenses" style="padding-bottom: 2vh">
 
 								<form name="myFormExpense" class="col-lg-12" action="/depense" method="post" novalidate>
 
@@ -12,16 +12,16 @@
 
 									Date de la dépense:
 									<!-- Date input datepicker ==>https://formden.com/blog/date-picker -->
-									<input class="form-control" id="date_depense" name="date_depense" placeholder="YYYY/MM/DD" type="text" value="" required/>
+									<input class="form-control" id="date_depense" name="date_depense" placeholder="AAAA/MM/JJ" type="text" value="" required/>
 									<!-- today() ==>mettre par défaut la date d'aujourd'hui  -->
 									<span style="color:red" ng-show="myFormExpense.date_depense.$dirty && myFormExpense.date_depense.$error.required">Date requise</span>
-							</div>
+							 </div>
 
 
 								<div class="col-lg-12 depenseFormDivlabelInput">
 
 									Catégories de dépenses:
-									<select name="categories" class="col-lg-12">
+									<select name="categories" class="selectpicker form-control">
 
 										<!-- début DEPENSES MENAGERES ALIMENTATION -->
 
@@ -148,31 +148,30 @@
 		        <!-- FIN Section AJOUT DEPENSE  -->
 
 
-            <div  class="col-lg-7" id="ongletdonneesDepenses" style="border: 1vh solid #5900b3;margin-top:4vh;">
-
-              <table border="1" class="table table-stripted">
+              <table  id="tableDepense" class="col-lg-7 col-md-12 col-sm-12 col-xs-12 table-hover table-responsive table-condensed" style="border: 1vh solid #5900b3;margin-top:4vh;">
                 <tr>
-                  <td>D</td>
-
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Id</td>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
+                  <td class="col-lg-1">Suppr</td>
+                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Id</td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Categories</td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Date</td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;">Montant</td>
                 </tr>
 
 
               <% for (depense of listDepense){%>
                 <tr>
-                  <td class="col-lg-1" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/depense/delete/<%=depense.id%>">Supprimer</a></td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><a href="/depense/delete/<%=depense.id%>"><span class="input-group-addon" style="height:3vh; background-color:#9494b8"><i class="glyphicon glyphicon-trash"></i></span></a></td>
 
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.id%></td>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.categories%></td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.id%></td>
+
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.categories%></td>
                   <%
                     var d = new Date(depense.date_depense)
                     var tmpDate = d.getDay()+'/' +(d.getMonth()+1)+'/'+d.getFullYear()
                   %>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
-                  <td class="col-lg-4" style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.montant%></td>
+                  <td  style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=tmpDate%></td>
+
+                  <td style="height:5vh; border: 0.5vh solid #5900b3;margin-top:2vh;"><%=depense.montant%></td>
 
                 </tr>
 
@@ -181,7 +180,7 @@
               %>
             </table>
 
-            </div>
+
 
 
 

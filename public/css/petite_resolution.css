@@ -1,0 +1,118 @@
+@media all and (min-width: 768px) and (max-width: 800px)
+{
+
+	#devise{
+	height: 9vh;
+	font-size:3vh;
+	}
+
+	section{
+	  margin: 0;
+
+	}
+
+	form{
+		padding:0;
+	}
+.afficheur{
+	width: auto;
+}
+
+}
+
+@media all and (min-width:420px ) and (max-width: 1023px)
+{
+
+	#devise{
+	height: 6vh;
+	font-size:2vh;
+	margin-top: 4vh;
+	}
+
+	section{
+	  margin-top: 0vh;
+	}
+
+	form{
+		padding-bottom: 0vh;
+	}
+
+
+}
+
+@media all and (min-width: 150px) and (max-width: 1200px)
+{
+
+	.slider {
+	    position: relative;
+	    width: 100%;
+	    height: 30vh;
+	    margin: auto;
+	    margin-top: 20vh;
+	    transform: translateY(-50%);
+	    border: 1.5vh solid #fff;
+	    border-radius: 1.5vh;
+	    box-shadow: 0 1.5vh 4vh rgba(0, 0, 0, 1);
+	}
+
+	.slideImage {
+	    position: absolute;
+	    display: none;
+	    width: 100%;
+	    height: 100%;
+	    margin: 0;
+
+}
+
+.logo1{
+	width: 0vh;
+	height: 0vh;
+	visibility: collapse;
+}
+.logo2{
+visibility: collapse;
+width: 0vh;
+height: 0vh;
+}
+
+#devise{
+margin-top: -6vh;
+}
+
+
+
+}
+
+
+@media all and (min-width: 320px) and (max-width: 768px)
+{
+
+	.logo1{
+		width: 0vh;
+		height: 0vh;
+		visibility: collapse;
+	}
+	.logo2{
+	visibility: collapse;
+	width: 0vh;
+	height: 0vh;
+	}
+
+	#ongletDonneesGrandEcran{
+		display: none;
+	}
+
+
+	#devise{
+	margin-top: -6vh;
+	}
+
+
+	section{
+	  margin-top: 0vh;
+	}
+
+	form{
+		padding-bottom: 0vh;
+	}
+}

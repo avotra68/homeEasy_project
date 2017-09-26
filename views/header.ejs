@@ -5,7 +5,7 @@
 
   <title>HomeEasyManagement/depenses</title>
 
-	<link rel="icon" href="images/logo_HomeEasyManagement.png" type="image/png" sizes="16x16">
+	<link rel="icon" href="images/logo_HomeEasyManagement.png" type="image/png" size="16x16">
 
   <link rel="stylesheet" href="css/style.css">
     <!--Pour les animations wow  -->
@@ -80,7 +80,7 @@
 		    mois_inputDepense.datepicker(options);
 
 
-			// check 2 password ==>inscription
+			// comparer 2 password ==>inscription
 		 $('#confirm_passwordInscription').on('keyup', function () {
 	  	if ($('#motDePasse').val() == $('#confirm_passwordInscription').val()) {
 	    $('#message').html('Mot de passe identitque').css('color', 'green');
@@ -103,11 +103,14 @@
 		<div ng-controller="AppsHomeController" class="container fluid" >
 
 			<div class="row" id="entete">
+				<div class="col-lg-12  col-md-12  col-sm-12 col-xs-12">
+					<img class="logo1 col-lg-1 col-md-1 img-responsive " src="images/logo_HomeEasyManagement.png" alt="logo du home management">
+					<!--Devise => animation js  -->
+					<p id="devise"class=" col-lg-10  col-md-10  col-sm-12  col-xs-12 "></p>
+					<img class="logo1 col-lg-1 col-md-1  img-responsive" src="images/logo_HomeEasyManagement.png" alt="logo du home management">
+				</div>
 
-				<img id="logo"class="img-responsive col-lg-2" src="images/logo_HomeEasyManagement.png" alt="logo du home management">
-				<!--Devise => animation js  -->
-				<p id="devise"class="col-lg-8"></p>
-				<img id="logo"class="img-responsive col-lg-2" src="images/logo_HomeEasyManagement.png" alt="logo du home management">
+
 
 			</div>
 
@@ -135,14 +138,14 @@
             <ul class="nav navbar-nav wow pulse data-wow-duration="100s"">
 							<li><a href="accueil">Accueil</a></li>
 							<%
-
 								if(typeof locals.user!= 'undefined'){
 									console.log('user = ' + JSON.stringify(locals.user))
 
 									 if(locals.user.connected==='TRUE'){%>
 										<li><a href="revenu">Revenus</a></a></li>
 										<li><a href="depense">Depenses</a></li>
-										<li><a href="donnees">Synthese</a></a></li>
+										<li><a href="donnees">Synthese</a></li>
+										<li><a href="editUserProfil">Votre profil</a></li>
 										<%
 											if(locals.user.isAdmin==='TRUE'){
 										%>
@@ -163,9 +166,8 @@
 								{
 							%>
 
-
 							<li><a href="login">Login</a></li>
-							<li><a href="connexionInscription">S'inscrire</a></li>
+							<li><a href="inscription">S'inscrire</a></li>
 							<li><a href="contact">Contact</a></li>
 
 							<%
