@@ -241,3 +241,5 @@ function adminRightNeeded(req, res, next){
 
   app.get("/editUserProfil/delete/:idUser", connectionNeeded,rootDeleteProfilGetCtrl.cleObjetDeleteProfilGetCtrl )
   // Fin routes
+
+  module.exports = app;

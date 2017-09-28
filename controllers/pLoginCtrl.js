@@ -54,7 +54,7 @@ function loginPostCtrl (req, res){
           req.session.name = results[0].nom + ' ' + results[0].prenom;
           req.session.connected = "TRUE";
           req.session.error = ""
-          req.session.flash = "Connexion ok";
+          req.session.flash = "Connexion réussie";
           res.locals.user = req.session;
 
           res.render("accueil")

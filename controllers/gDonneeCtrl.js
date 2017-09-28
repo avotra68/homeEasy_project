@@ -7,7 +7,7 @@ function donneeGetCtrl (request, response){
 
       Donnees.selectDepense(request.session.userId, function(listDepenses){
         response.render('donnees', {listRevenu : listRevenus, listDepense : listDepenses});
-        // pour récuperer message all crée db.js parite vue au
+
       });
     });
 
